@@ -5,6 +5,7 @@ namespace Cjmellor\Approval\Concerns;
 use Cjmellor\Approval\Enums\ApprovalStatus;
 use Cjmellor\Approval\Models\Approval;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Support\Facades\Auth;
 
 trait MustBeApproved
 {
@@ -40,12 +41,12 @@ trait MustBeApproved
 
         $approvalAttributes = $model->getApprovalAttributes();
 
-        if (! empty($approvalAttributes)) {
+        if (!empty($approvalAttributes)) {
             $noApprovalNeeded = collect($model->getDirty())
                 ->except($approvalAttributes)
                 ->toArray();
 
-            if (! empty($noApprovalNeeded)) {
+            if (!empty($noApprovalNeeded)) {
                 $model->discardChanges();
                 $model->forceFill($noApprovalNeeded);
             }
@@ -59,6 +60,7 @@ trait MustBeApproved
             'new_data' => $filteredDirty,
             'original_data' => $model->getOriginalMatchingChanges(),
             'foreign_key' => $foreignKeyValue,
+            'user_id' => Auth::user()?->id
         ]);
 
         if (empty($noApprovalNeeded)) {

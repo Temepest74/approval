@@ -90,6 +90,8 @@ Here is some info about the columns in the `approvals` table:
 
 `foreign_key` => A foreign key to the Model that the approval is for
 
+`user_id` => The user who created this approval request
+
 ### Bypassing Approval Check
 
 If you want to check if the Model data will be bypassed, use the `isApprovalBypassed` method.
