@@ -62,7 +62,7 @@ trait MustBeApproved
             'original_data' => $model->getOriginalMatchingChanges(),
             'foreign_key' => $foreignKeyValue,
             'creator_id' => $creator?->id,
-            'creator_type' => get_class($creator),
+            'creator_type' => $creator ? get_class($creator) : null,
         ]);
 
         if (empty($noApprovalNeeded)) {
