@@ -56,11 +56,13 @@ trait MustBeApproved
             return false;
         }
 
+        $creator = Auth::user();
         $model->approvals()->create([
             'new_data' => $filteredDirty,
             'original_data' => $model->getOriginalMatchingChanges(),
             'foreign_key' => $foreignKeyValue,
-            'user_id' => Auth::user()?->id
+            'creator_id' => $creator?->id,
+            'creator_type' => get_class($creator),
         ]);
 
         if (empty($noApprovalNeeded)) {

@@ -33,6 +33,11 @@ class Approval extends Model
         return $this->morphTo();
     }
 
+    public function creator(): MorphTo
+    {
+        return $this->morphTo();
+    }
+
     public function approveIf(bool $boolean): void
     {
         if ($boolean) {
@@ -42,7 +47,7 @@ class Approval extends Model
 
     public function approveUnless(bool $boolean): void
     {
-        if (! $boolean) {
+        if (!$boolean) {
             $this->approve();
         }
     }
@@ -56,7 +61,7 @@ class Approval extends Model
 
     public function postponeUnless(bool $boolean): void
     {
-        if (! $boolean) {
+        if (!$boolean) {
             $this->postpone();
         }
     }
@@ -70,14 +75,14 @@ class Approval extends Model
 
     public function rejectUnless(bool $boolean): void
     {
-        if (! $boolean) {
+        if (!$boolean) {
             $this->reject();
         }
     }
 
     public function rollback(Closure $condition = null, $bypass = true): void
     {
-        if ($condition && ! $condition($this)) {
+        if ($condition && !$condition($this)) {
             return;
         }
 

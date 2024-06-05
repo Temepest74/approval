@@ -6,21 +6,19 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    public function up(): void
+    public function up()
     {
         Schema::table('approvals', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id')->nullable();
-
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users');
+            $table->unsignedBigInteger('creator_id')->nullable();
+            $table->string('creator_type')->nullable();
         });
     }
 
-    public function down(): void
+    public function down()
     {
         Schema::table('approvals', function (Blueprint $table) {
-            $table->dropColumn('user_id');
+            $table->dropColumn('creator_id');
+            $table->dropColumn('creator_type');
         });
     }
 };
