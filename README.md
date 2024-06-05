@@ -92,6 +92,8 @@ Here is some info about the columns in the `approvals` table:
 
 `creator_id` => The id of the model who requested the approval
 
+`creator_type` => The class name of the model who requested the approval
+
 ### Bypassing Approval Check
 
 If you want to check if the Model data will be bypassed, use the `isApprovalBypassed` method.
