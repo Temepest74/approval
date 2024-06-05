@@ -90,7 +90,7 @@ Here is some info about the columns in the `approvals` table:
 
 `foreign_key` => A foreign key to the Model that the approval is for
 
-`user_id` => The user who created this approval request
+`creator_id` => The id of the model who requested the approval
 
 ### Bypassing Approval Check
 
