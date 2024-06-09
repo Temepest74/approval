@@ -12,6 +12,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Facades\Event;
 
+/**
+ * @property ?int $approvalable_id
+ * @property ?string $approvalable_type
+ */
 class Approval extends Model
 {
     protected $guarded = [];
