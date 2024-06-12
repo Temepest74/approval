@@ -15,6 +15,10 @@ use Illuminate\Support\Facades\Event;
 /**
  * @property ?int $approvalable_id
  * @property ?string $approvalable_type
+ *
+ * @method int approve(bool $persist = true)
+ * @method int reject()
+ * @method int postpone()
  */
 class Approval extends Model
 {
