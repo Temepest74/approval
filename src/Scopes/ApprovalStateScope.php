@@ -107,6 +107,11 @@ class ApprovalStateScope implements Scope
 
                 $newData = $builder->getModel()->new_data->toArray();
 
+                $foreignKey = $builder->getModel()->foreign_key;
+                if ($foreignKey) {
+                    $newData[$model->getApprovalForeignKeyName()] = $foreignKey;
+                }
+
                 // make sure we cast all attributes
                 foreach ($newData as $key => $value) {
                     $newData[$key] = $model->callCastAttribute($key, $value);
