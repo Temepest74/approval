@@ -4,6 +4,7 @@ namespace Cjmellor\Approval\Scopes;
 
 use Cjmellor\Approval\Enums\ApprovalStatus;
 use Cjmellor\Approval\Events\ModelApproved;
+use Cjmellor\Approval\Events\ModelApproving;
 use Cjmellor\Approval\Events\ModelRejected;
 use Cjmellor\Approval\Events\ModelSetPending;
 use Illuminate\Database\Eloquent\Builder;
@@ -118,6 +119,8 @@ class ApprovalStateScope implements Scope
                 }
 
                 $model->forceFill($newData);
+
+                Event::dispatch(new ModelApproving($builder->getModel(), auth()->user()));
 
                 $model->withoutApproval()->save();
             }
