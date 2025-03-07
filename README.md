@@ -181,6 +181,27 @@ $approval->rejectUnless(true);
 $approval->postponeUnless(false);
 ```
 
+### Requestor Functionality
+
+The package includes methods to work with the creator/requestor of an approval:
+
+```php
+// Get the requestor (creator) of the approval
+$requestor = $approval->requestor;
+```
+
+```php
+// Filter approvals by requestor
+$userApprovals = Approval::requestedBy($user)->get();
+```
+
+```php
+// Check if an approval was requested by a specific user
+if ($approval->wasRequestedBy($user)) {
+    // Do something
+}
+```
+
 ### Events
 
 Once a Model's state has been changed, an event will be fired.
@@ -190,16 +211,6 @@ Once a Model's state has been changed, an event will be fired.
 - ModelPostponed::class
 - ModelRejected::class
 - ApprovalCreated::class
-```
-
-### Persisting data
-
-By default, once you approve a Model, it will be inserted into the database.
-
-If you don't want to persist to the database on approval, set a `false` flag on the `approve` method.
-
-```php
-Approval::find(1)->approve(persist: false);
 ```
 
 ## Rollbacks
